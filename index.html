@@ -197,11 +197,11 @@
   };
 
   var getWizardX = function(width) {
-    return width / 2;
+    return (width - wizardWidth) / 2;
   };
 
   var getWizardY = function(height) {
-    return height / 4;
+    return height - getWizardHeight() - height / 3;
   };
 </script>
 <script src="js/game.js"></script>
