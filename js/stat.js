@@ -1,9 +1,17 @@
 'use strict';
 
-var BAR_HEIGHT = 150;
-
 window.renderStatistics = function (ctx, names, times) {
-  /** @description Определеяет максимальное время прохождение игры и находит пропорцию.
+  var GAP = 10;
+  var CLOUD_WIDTH = 420;
+  var CLOUD_HEIGHT = 270;
+  var BAR_HEIGHT = 150;
+  var BAR_WIDTH = 40;
+  var CLOUD_X = 100;
+  var CLOUD_Y = 10;
+  var FONT_GAP = 90;
+  var TIMES_GAP = 235;
+
+  /** @description Определеяет максимальное время прохождения игры и находит пропорцию.
    * @return {number}
    */
   var defineMaxValue = function () {
@@ -16,56 +24,53 @@ window.renderStatistics = function (ctx, names, times) {
     return maxTimeValue / BAR_HEIGHT;
   };
 
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.fillRect(110, 20, 420, 270);
-  ctx.fillStyle = 'white';
-  ctx.fillRect(100, 10, 420, 270);
+  /**
+   * @description Рисует облако.
+   * @param ctx Контекст canvas.
+   * @param x Координата x облака.
+   * @param y Координата y облака.
+   * @param color Цвет облака.
+   */
+  var renderCloud = function (ctx, x, y, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
+  };
+
+  /**
+   * @description Рисует гистограммы.
+   * @param ctx Контекст canvas.
+   * @param names Массив с именами игроков.
+   * @param times Массив с временами победы игроков.
+   */
+  var renderGists = function (ctx, names, times) {
+    for (var i = 0; i < names.length; i++) {
+      if (names[i] === 'Вы') {
+        ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+      } else {
+        ctx.fillStyle = 'blue';
+      }
+      ctx.fillRect(BAR_HEIGHT - GAP + FONT_GAP * i, CLOUD_HEIGHT - GAP * 3, BAR_WIDTH, -times[i] / defineMaxValue());
+    }
+
+  };
+
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, 'white');
 
   ctx.fillStyle = 'black';
   ctx.font = 'PT Mono 16px';
   ctx.fillText('Ура, вы победили!', 120, 40);
   ctx.fillText('Список результатов:', 120, 60);
 
-  ctx.fillText(names[0], 140, 260);
-  ctx.fillText(names[1], 230, 260);
-  ctx.fillText(names[2], 320, 260);
-  ctx.fillText(names[3], 410, 260);
-
-  if (names[0] === 'Вы') {
-    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-  } else {
-    ctx.fillStyle = 'blue'
+  for (var i = 0; i < names.length; i++) {
+    ctx.fillText(names[i], BAR_HEIGHT - GAP + FONT_GAP * i, CLOUD_WIDTH - BAR_WIDTH * 4)
   }
 
-  ctx.fillRect(140, 240, 40, -times[0] / defineMaxValue());
-
-  if (names[1] === 'Вы') {
-    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-  } else {
-    ctx.fillStyle = 'blue'
-  }
-
-  ctx.fillRect(230, 240, 40, -times[1] / defineMaxValue());
-
-  if (names[2] === 'Вы') {
-    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-  } else {
-    ctx.fillStyle = 'blue'
-  }
-
-  ctx.fillRect(320, 240, 40, -times[2] / defineMaxValue());
-
-  if (names[3] === 'Вы') {
-    ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-  } else {
-    ctx.fillStyle = 'blue'
-  }
-
-  ctx.fillRect(410, 240, 40, -times[3] / defineMaxValue());
+  renderGists(ctx, names, times);
 
   ctx.fillStyle = 'black';
-  ctx.fillText(times[0].toFixed(0), 140, -times[0] / defineMaxValue() + 235);
-  ctx.fillText(times[1].toFixed(0), 230, -times[1] / defineMaxValue() + 235);
-  ctx.fillText(times[2].toFixed(0), 320, -times[2] / defineMaxValue() + 235);
-  ctx.fillText(times[3].toFixed(0), 410, -times[3] / defineMaxValue() + 235);
+
+  for (i = 0; i < times.length; i++) {
+    ctx.fillText(times[i].toFixed(0), BAR_HEIGHT - GAP + FONT_GAP * i, -times[i] / defineMaxValue() + TIMES_GAP);
+  }
 };
