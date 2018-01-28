@@ -12,13 +12,14 @@ window.renderStatistics = function (ctx, names, times) {
   var TIMES_GAP = 235;
 
   /** @description Определеяет максимальное время прохождения игры и находит пропорцию.
+   * @param arr Массив с временами победы игроков.
    * @return {number}
    */
-  var defineMaxValue = function () {
+  var defineMaxValue = function (arr) {
     var maxTimeValue = 0;
-    for (var i = 0; i < times.length; i++) {
-      if (times[i] > maxTimeValue) {
-        maxTimeValue = times[i];
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > maxTimeValue) {
+        maxTimeValue = arr[i];
       }
     }
     return maxTimeValue / BAR_HEIGHT;
@@ -49,7 +50,7 @@ window.renderStatistics = function (ctx, names, times) {
       } else {
         ctx.fillStyle = 'blue';
       }
-      ctx.fillRect(BAR_HEIGHT - GAP + FONT_GAP * i, CLOUD_HEIGHT - GAP * 3, BAR_WIDTH, -times[i] / defineMaxValue());
+      ctx.fillRect(BAR_HEIGHT - GAP + FONT_GAP * i, CLOUD_HEIGHT - GAP * 3, BAR_WIDTH, -times[i] / defineMaxValue(times));
     }
 
   };
@@ -66,11 +67,12 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(names[i], BAR_HEIGHT - GAP + FONT_GAP * i, CLOUD_WIDTH - BAR_WIDTH * 4)
   }
 
+
   renderGists(ctx, names, times);
 
   ctx.fillStyle = 'black';
 
   for (i = 0; i < times.length; i++) {
-    ctx.fillText(times[i].toFixed(0), BAR_HEIGHT - GAP + FONT_GAP * i, -times[i] / defineMaxValue() + TIMES_GAP);
+    ctx.fillText(times[i].toFixed(0), BAR_HEIGHT - GAP + FONT_GAP * i, -times[i] / defineMaxValue(times) + TIMES_GAP);
   }
 };
