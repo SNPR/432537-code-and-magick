@@ -81,8 +81,8 @@ window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, 'white');
 
-  renderText(ctx, 'Ура, вы победили!', 120, 40);
-  renderText(ctx, 'Список результатов:', 120, 60);
+  renderText(ctx, 'Ура, вы победили!', CLOUD_X + GAP * 2, CLOUD_Y + GAP * 3);
+  renderText(ctx, 'Список результатов:', CLOUD_X + GAP * 2, CLOUD_Y + GAP * 5);
 
   renderBarChart(ctx, names, times);
 };
