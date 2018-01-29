@@ -39,7 +39,7 @@ var renderCloud = function (ctx, x, y, color) {
 };
 
 /**
- * @description Рисует гистограммы c именами и временами прохождения игры игроков.
+ * @description Рисует гистограммы c именами и игроков временем прохождения игры каждого из них.
  * @param {Object} ctx Контекст отрисовки Canvas.
  * @param {Array} names Массив имён игроков.
  * @param {Array} times Массив времён победы игроков.
@@ -72,7 +72,7 @@ var renderText = function (ctx, text, x, y) {
 };
 
 /**
- * @description Выводит окно с результатами игры со счётом игроков и гистограммами.
+ * @description Выводит окно с результатов игры, со счётом игроков и гистограммами.
  * @param {Object} ctx Контекст отрисовки Canvas.
  * @param {Array} names Массив имён игроков.
  * @param {Array} times Массив времён победы игроков.
