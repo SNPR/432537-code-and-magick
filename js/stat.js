@@ -72,12 +72,23 @@ var renderText = function (ctx, text, x, y) {
 };
 
 /**
+ * @description Сравнивает длины массивов и в случае различия приравнивает их.
+ * @param {Array} names Массив имён игроков.
+ * @param {Array} times Массив времён победы игроков.
+ */
+var arraysLengthsCompare = function (names, times) {
+  names.length > times.length ? names.length = times.length : times.length = names.length;
+};
+
+/**
  * @description Выводит окно с результатов игры, со счётом игроков и гистограммами.
  * @param {Object} ctx Контекст отрисовки Canvas.
  * @param {Array} names Массив имён игроков.
  * @param {Array} times Массив времён победы игроков.
  */
 window.renderStatistics = function (ctx, names, times) {
+  arraysLengthsCompare(names, times);
+
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, 'white');
 
