@@ -77,7 +77,11 @@ var renderText = function (ctx, text, x, y) {
  * @param {Array} times Массив времён победы игроков.
  */
 var arraysLengthsCompare = function (names, times) {
-  names.length > times.length ? names.length = times.length : times.length = names.length;
+  if (names.length > times.length) {
+    names.length = times.length;
+  } else {
+    times.length = names.length;
+  }
 };
 
 /**
