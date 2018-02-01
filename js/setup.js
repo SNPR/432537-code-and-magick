@@ -19,48 +19,46 @@ var compareRandom = function () {
 /**
  * Перемешивает значения массива случайным образом и возвращает массив длины WIZARDS_TOTAL.
  * @param {Array} array Массив с любым типом данных.
- * @param {number} WIZARDS_TOTAL Заданное число волшебников.
+ * @param {number} arrayLenght Желаемая длина массива.
  * @return {Array} Массив со случайным порядком значений.
  */
-var randomizeArray = function (array, WIZARDS_TOTAL) {
+var randomizeArray = function (array, arrayLenght) {
   var result = array.slice();
   result.sort(compareRandom);
-  return result.splice(0, WIZARDS_TOTAL);
+  return result.splice(0, arrayLenght);
 };
 
-var randomNames = randomizeArray(WIZARD_NAMES, WIZARDS_TOTAL);
-var randomSurnames = randomizeArray(WIZARD_SURNAMES, WIZARDS_TOTAL);
-var randomCoatColors = randomizeArray(COAT_COLORS, WIZARDS_TOTAL);
-var randomEyesColors = randomizeArray(EYES_COLORS, WIZARDS_TOTAL);
+var names = randomizeArray(WIZARD_NAMES, WIZARDS_TOTAL);
+var surnames = randomizeArray(WIZARD_SURNAMES, WIZARDS_TOTAL);
+var coatColors = randomizeArray(COAT_COLORS, WIZARDS_TOTAL);
+var eyesColors = randomizeArray(EYES_COLORS, WIZARDS_TOTAL);
 
-var wizardsFullNames = [];
+var fullNames = [];
 
 for (var i = 0; i < WIZARDS_TOTAL; i++) {
-  wizardsFullNames.push(randomNames[i] + ' ' + randomSurnames[i]);
+  fullNames.push(names[i] + ' ' + surnames[i]);
 }
 
-var wizards = [
-  {
-    name: wizardsFullNames[0],
-    coatColor: randomCoatColors[0],
-    eyesColor: randomEyesColors[0]
-  },
-  {
-    name: wizardsFullNames[1],
-    coatColor: randomCoatColors[1],
-    eyesColor: randomEyesColors[1]
-  },
-  {
-    name: wizardsFullNames[2],
-    coatColor: randomCoatColors[2],
-    eyesColor: randomEyesColors[2]
-  },
-  {
-    name: wizardsFullNames[3],
-    coatColor: randomCoatColors[3],
-    eyesColor: randomEyesColors[3]
+/**
+ * Генерирует массив объектов с параметрами волшебников.
+ * @param {Array} fullNames Массив полных имён волшебников.
+ * @param {Array} coatColors Массив цветов мантий волшебников.
+ * @param {Array} eyesColors Массив цветов глаз волшебников.
+ * @return {Array}
+ */
+var generateWizards = function (fullNames, coatColors, eyesColors) {
+  var arr = [];
+  for (var i = 0; i < WIZARDS_TOTAL; i++) {
+    var obj = {};
+    obj.name = fullNames[i];
+    obj.coatColor = coatColors[i];
+    obj.eyesColor = eyesColors[i];
+    arr.push(obj);
   }
-];
+  return arr;
+};
+
+console.log(generateWizards(fullNames, coatColors, eyesColors));
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
