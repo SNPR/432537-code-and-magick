@@ -49,11 +49,7 @@ for (var i = 0; i < WIZARDS_TOTAL; i++) {
 var generateWizards = function (wizardFullNames, wizardCoatColors, wizardEyesColors) {
   var arr = [];
   for (i = 0; i < WIZARDS_TOTAL; i++) {
-    var obj = {};
-    obj.name = wizardFullNames[i];
-    obj.coatColor = wizardCoatColors[i];
-    obj.eyesColor = wizardEyesColors[i];
-    arr.push(obj);
+    arr.push({name: wizardFullNames[i], coatColor: wizardCoatColors[i], eyesColor: wizardEyesColors[i]});
   }
   return arr;
 };
