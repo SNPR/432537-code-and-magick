@@ -32,7 +32,6 @@ var names = randomizeArray(WIZARD_NAMES, WIZARDS_TOTAL);
 var surnames = randomizeArray(WIZARD_SURNAMES, WIZARDS_TOTAL);
 var coatColors = randomizeArray(COAT_COLORS, WIZARDS_TOTAL);
 var eyesColors = randomizeArray(EYES_COLORS, WIZARDS_TOTAL);
-
 var fullNames = [];
 
 for (var i = 0; i < WIZARDS_TOTAL; i++) {
@@ -61,6 +60,11 @@ var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 var wizards = generateWizards(fullNames, coatColors, eyesColors);
 
+/**
+ * Создаёт глубокую копию узла с шаблоном данных о волшебнике.
+ * @param {Array} wizard Массив объектов с параметрами волшебников.
+ * @return {Array} Шаблон волшебника с заполненными данными.
+ */
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
