@@ -41,24 +41,24 @@ for (var i = 0; i < WIZARDS_TOTAL; i++) {
 
 /**
  * Генерирует массив объектов с параметрами волшебников.
- * @param {Array} fullNames Массив полных имён волшебников.
- * @param {Array} coatColors Массив цветов мантий волшебников.
- * @param {Array} eyesColors Массив цветов глаз волшебников.
+ * @param {Array} wizardFullNames Массив полных имён волшебников.
+ * @param {Array} wizardCoatColors Массив цветов мантий волшебников.
+ * @param {Array} wizardEyesColors Массив цветов глаз волшебников.
  * @return {Array}
  */
-var generateWizards = function (fullNames, coatColors, eyesColors) {
+var generateWizards = function (wizardFullNames, wizardCoatColors, wizardEyesColors) {
   var arr = [];
-  for (var i = 0; i < WIZARDS_TOTAL; i++) {
+  for (i = 0; i < WIZARDS_TOTAL; i++) {
     var obj = {};
-    obj.name = fullNames[i];
-    obj.coatColor = coatColors[i];
-    obj.eyesColor = eyesColors[i];
+    obj.name = wizardFullNames[i];
+    obj.coatColor = wizardCoatColors[i];
+    obj.eyesColor = wizardEyesColors[i];
     arr.push(obj);
   }
   return arr;
 };
 
-console.log(generateWizards(fullNames, coatColors, eyesColors));
+generateWizards(fullNames, coatColors, eyesColors);
 
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
