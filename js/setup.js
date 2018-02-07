@@ -64,13 +64,17 @@ var shuffleArray = function (array) {
 /**
  * Генерирует массив с заданным количеством объектов волшебников.
  * @param {number} amountOfWizards Количество объектов с волшебниками, которое будет сгенерировано.
- * @return {Array}
+ * @param {Array} namesArray Массив имён волшебников.
+ * @param {Array} surnamesArray Массив фамилий волшебников.
+ * @param {Array} coatColorsArray Массив цветов мантий волшебников.
+ * @param {Array} eyesColorsArray Массив цвет глаз волшебников.
+ * @return {Array} Массив объектов с параметрами волшебников.
  */
-var generateWizards = function (amountOfWizards) {
-  var names = shuffleArray(WIZARD_NAMES);
-  var surnames = shuffleArray(WIZARD_SURNAMES);
-  var coatColors = shuffleArray(COAT_COLORS);
-  var eyesColors = shuffleArray(EYES_COLORS);
+var generateWizards = function (amountOfWizards, namesArray, surnamesArray, coatColorsArray, eyesColorsArray) {
+  var names = shuffleArray(namesArray);
+  var surnames = shuffleArray(surnamesArray);
+  var coatColors = shuffleArray(coatColorsArray);
+  var eyesColors = shuffleArray(eyesColorsArray);
   var wizardsArray = [];
   for (var i = 0; i < amountOfWizards; i++) {
     wizardsArray.push({
@@ -83,7 +87,7 @@ var generateWizards = function (amountOfWizards) {
 };
 
 var similarListElement = document.querySelector('.setup-similar-list');
-var wizards = generateWizards(WIZARDS_TOTAL);
+var wizards = generateWizards(WIZARDS_TOTAL, WIZARD_NAMES, WIZARD_SURNAMES, COAT_COLORS, EYES_COLORS);
 
 /**
  * Создаёт глубокую копию узла с шаблоном параметров волшебника.
