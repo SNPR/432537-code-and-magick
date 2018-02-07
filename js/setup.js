@@ -33,6 +33,8 @@ var WIZARD_SURNAMES = [
 
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_TOTAL = 4;
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 /**
  * Вспомогательная функция для метода сортировки массива arr.sort. По стандарту Math.random()
@@ -77,9 +79,6 @@ var generateWizards = function (amountOfWizards) {
   return wizardsArray;
 };
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-
 var similarListElement = document.querySelector('.setup-similar-list');
 var wizards = generateWizards(WIZARDS_TOTAL);
 
@@ -106,3 +105,43 @@ for (var i = 0; i < wizards.length; i++) {
 similarListElement.appendChild(fragment);
 
 document.querySelector('.setup-similar').classList.remove('hidden');
+
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
