@@ -109,9 +109,12 @@ document.querySelector('.setup-similar').classList.remove('hidden');
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+var getActiveElement = function () {
+  return document.activeElement.tagName;
+};
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  if (evt.keyCode === ESC_KEYCODE && getActiveElement() !== 'INPUT') {
     closePopup();
   }
 };
