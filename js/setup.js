@@ -37,6 +37,15 @@ var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 
 /**
+ * Возвращает случайный индекс массива
+ * @param {Array} array Массив с данными любого типа.
+ * @return {number} Случайный индекс массива, переданного функции.
+ */
+var getRandomIndex = function (array) {
+  return Math.floor(Math.random() * array.length);
+};
+
+/**
  * Вспомогательная функция для метода сортировки массива arr.sort. По стандарту Math.random()
  * возвращает случайное число от 0 до 1. "-0.5" указано для того, чтобы метод возвращал случайное
  * число от -0.5 до 0.5. Благодарю такому "трюку" сортировка становится хаотичной.
@@ -47,15 +56,14 @@ var compareRandom = function () {
 };
 
 /**
- * Перемешивает значения массива случайным образом и возвращает массив длины arrayLenght.
+ * Перемешивает значения массива случайным образом.
  * @param {Array} array Массив с любым типом данных.
- * @param {number} arrayLenght Желаемая длина массива.
  * @return {Array} Массив со случайным порядком исходных значений.
  */
-var shuffleAndCutArray = function (array, arrayLenght) {
+var shuffleArray = function (array) {
   var result = array.slice();
   result.sort(compareRandom);
-  return result.splice(0, arrayLenght);
+  return result;
 };
 
 /**
@@ -64,10 +72,10 @@ var shuffleAndCutArray = function (array, arrayLenght) {
  * @return {Array}
  */
 var generateWizards = function (amountOfWizards) {
-  var names = shuffleAndCutArray(WIZARD_NAMES, WIZARDS_TOTAL);
-  var surnames = shuffleAndCutArray(WIZARD_SURNAMES, WIZARDS_TOTAL);
-  var coatColors = shuffleAndCutArray(COAT_COLORS, WIZARDS_TOTAL);
-  var eyesColors = shuffleAndCutArray(EYES_COLORS, WIZARDS_TOTAL);
+  var names = shuffleArray(WIZARD_NAMES);
+  var surnames = shuffleArray(WIZARD_SURNAMES);
+  var coatColors = shuffleArray(COAT_COLORS);
+  var eyesColors = shuffleArray(EYES_COLORS);
   var wizardsArray = [];
   for (var i = 0; i < amountOfWizards; i++) {
     wizardsArray.push({
@@ -109,6 +117,7 @@ document.querySelector('.setup-similar').classList.remove('hidden');
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+
 var getActiveElement = function () {
   return document.activeElement.tagName;
 };
@@ -148,3 +157,6 @@ setupClose.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
+
+var wizardEyes = document.querySelector('.wizard-eyes');
+wizardEyes.style.fill = 'red';
