@@ -46,24 +46,19 @@ var getRandomIndex = function (array) {
 };
 
 /**
- * Вспомогательная функция для метода сортировки массива arr.sort. По стандарту Math.random()
- * возвращает случайное число от 0 до 1. "-0.5" указано для того, чтобы метод возвращал случайное
- * число от -0.5 до 0.5. Благодарю такому "трюку" сортировка становится хаотичной.
- * @return {number} Возвращает случайное значение от -0.5 до 0.5.
- */
-var compareRandom = function () {
-  return Math.random() - 0.5;
-};
-
-/**
- * Перемешивает значения массива случайным образом.
- * @param {Array} array Массив с любым типом данных.
- * @return {Array} Массив со случайным порядком исходных значений.
+ * Функция для случайного перемешивания элементов массива.
+ * @param {Array} array Массив со значениями любого типа.
+ * @return {Array} Массив перемешанных значений.
  */
 var shuffleArray = function (array) {
-  var result = array.slice();
-  result.sort(compareRandom);
-  return result;
+  var arrayCopy = array.slice();
+  var mixedArray = [];
+  while (mixedArray.length < array.length) {
+    var randomIndex = getRandomIndex(arrayCopy);
+    mixedArray.push(arrayCopy[randomIndex]);
+    arrayCopy.splice(randomIndex, 1);
+  }
+  return mixedArray;
 };
 
 /**
