@@ -116,6 +116,7 @@ document.querySelector('.setup-similar').classList.remove('hidden');
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
+var wizardEyes = document.querySelector('.wizard-eyes');
 
 var getActiveElement = function () {
   return document.activeElement.tagName;
@@ -127,14 +128,20 @@ var onPopupEscPress = function (evt) {
   }
 };
 
+var onWizardEyesClick = function () {
+  wizardEyes.style.fill = EYES_COLORS[getRandomIndex(EYES_COLORS)];
+};
+
 var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
+  document.addEventListener('click', onWizardEyesClick);
 };
 
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  document.removeEventListener('click', onWizardEyesClick);
 };
 
 setupOpen.addEventListener('click', function () {
@@ -157,5 +164,4 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-var wizardEyes = document.querySelector('.wizard-eyes');
-wizardEyes.style.fill = 'red';
+
