@@ -167,6 +167,17 @@ var onPopupEscPress = function (evt) {
   }
 };
 
+/**
+ * Вспомогательная функция обработчика события открывающая окно настройки персонажа.
+ * Данная функция:
+ * 1. Отображает окно настройки персонажа.
+ * 2. Добавляет обработчиков событий:
+ * - закрывает окно настройки персонажа при нажатии клавиши 'ESC'.
+ * - изменяет цвет глаз волшебника в окне настройки персонажа, при клике на глаза.
+ * - изменяет цвет мантии волшебника в окне настройки персонажа, при клике на мантию.
+ * - изменяет цвет фаербола в окне настройки персонажа, при клике на фаербол.
+ * @param{object} evt Объект текущего события.
+ */
 var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
@@ -175,6 +186,17 @@ var openPopup = function () {
   fireball.addEventListener('click', onFireballClick);
 };
 
+/**
+ * Вспомогательная функция обработчика события закрывающая окно настройки персонажа.
+ * Данная функция:
+ * 1. Скрывает окно настройки персонажа.
+ * 2. Удаляет обработчиков событий:
+ * - закрывает окно настройки персонажа при нажатии клавиши 'ESC'.
+ * - изменяет цвет глаз волшебника в окне настройки персонажа, при клике на глаза.
+ * - изменяет цвет мантии волшебника в окне настройки персонажа, при клике на мантию.
+ * - изменяет цвет фаербола в окне настройки персонажа, при клике на фаербол.
+ * @param{object} evt Объект текущего события.
+ */
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
@@ -183,9 +205,7 @@ var closePopup = function () {
   document.removeEventListener('click', onFireballClick);
 };
 
-setupOpen.addEventListener('click', function () {
-  openPopup();
-});
+setupOpen.addEventListener('click', openPopup);
 
 setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
@@ -193,9 +213,7 @@ setupOpen.addEventListener('keydown', function (evt) {
   }
 });
 
-setupClose.addEventListener('click', function () {
-  closePopup();
-});
+setupClose.addEventListener('click', closePopup);
 
 setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
