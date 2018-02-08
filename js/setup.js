@@ -127,26 +127,44 @@ var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-
 var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
 var fireball = document.querySelector('.setup-fireball-wrap');
 
+/**
+ * Вспомогательная функция обработчика события для изменения цвета фаербола.
+ */
 var onFireballClick = function () {
   fireball.style.backgroundColor = FIREBALL_COLORS[getRandomIndex(FIREBALL_COLORS)];
 };
 
+/**
+ * Вспомогательная функция обработчика события для изменения цвета мантии.
+ */
 var onWizardCoatClick = function () {
   wizardCoat.style.fill = COAT_COLORS[getRandomIndex(COAT_COLORS)];
 };
 
+/**
+ * Вспомогательная функция обработчика события для изменения цвета глаз волшебника.
+ */
+var onWizardEyesClick = function () {
+  wizardEyes.style.fill = EYES_COLORS[getRandomIndex(EYES_COLORS)];
+};
+
+/**
+ * Определяет текущий активный элемент на странице.
+ * @return{string} Наименование текущего активного элемента.
+ */
 var getActiveElement = function () {
   return document.activeElement.tagName;
 };
 
+/**
+ * Вспомогательная функция обработчика события для закрытия окна при нажатии клавиши 'ESC'.
+ * Нажатие 'ESC' не срабатывает, если фокус находится в поле изменения имени персонажа.
+ * @param{object} evt Объект текущего события.
+ */
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && getActiveElement() !== 'INPUT') {
     closePopup();
   }
-};
-
-var onWizardEyesClick = function () {
-  wizardEyes.style.fill = EYES_COLORS[getRandomIndex(EYES_COLORS)];
 };
 
 var openPopup = function () {
