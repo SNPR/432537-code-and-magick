@@ -1,4 +1,5 @@
 'use strict';
+
 var FIREBALL_COLORS = [
   '#ee4830',
   '#30a8ee',
@@ -123,8 +124,9 @@ document.querySelector('.setup-similar').classList.remove('hidden');
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
-var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
-var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
+var wizardSetup = document.querySelector('.setup-wizard');
+var wizardEyes = wizardSetup.querySelector('.wizard-eyes');
+var wizardCoat = wizardSetup.querySelector('.wizard-coat');
 var fireball = document.querySelector('.setup-fireball-wrap');
 
 /**
@@ -135,17 +137,16 @@ var onFireballClick = function () {
 };
 
 /**
- * Вспомогательная функция обработчика события для изменения цвета мантии.
+ * Вспомогательная функция обработчика события для изменения цвета глаз и мантии.
+ * @param {object} evt Объект текущего события.
  */
-var onWizardCoatClick = function () {
-  wizardCoat.style.fill = COAT_COLORS[getRandomIndex(COAT_COLORS)];
-};
-
-/**
- * Вспомогательная функция обработчика события для изменения цвета глаз волшебника.
- */
-var onWizardEyesClick = function () {
-  wizardEyes.style.fill = EYES_COLORS[getRandomIndex(EYES_COLORS)];
+var onWizardClick = function (evt) {
+  if (evt.target === wizardEyes) {
+    wizardEyes.style.fill = EYES_COLORS[getRandomIndex(EYES_COLORS)];
+  }
+  if (evt.target === wizardCoat) {
+    wizardCoat.style.fill = COAT_COLORS[getRandomIndex(COAT_COLORS)];
+  }
 };
 
 /**
@@ -180,8 +181,7 @@ var onKeyPress = function (evt) {
 var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onKeyPress);
-  wizardEyes.addEventListener('click', onWizardEyesClick);
-  wizardCoat.addEventListener('click', onWizardCoatClick);
+  wizardSetup.addEventListener('click', onWizardClick);
   fireball.addEventListener('click', onFireballClick);
 };
 
@@ -198,9 +198,8 @@ var openPopup = function () {
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onKeyPress);
-  document.removeEventListener('click', onWizardEyesClick);
-  document.removeEventListener('click', onWizardCoatClick);
-  document.removeEventListener('click', onFireballClick);
+  wizardSetup.removeEventListener('click', onWizardClick);
+  fireball.removeEventListener('click', onFireballClick);
 };
 
 setupOpen.addEventListener('click', function () {
