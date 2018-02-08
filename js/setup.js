@@ -159,7 +159,7 @@ var getActiveElement = function () {
 /**
  * Вспомогательная функция обработчика события для закрытия окна при нажатии клавиши 'ESC'.
  * Нажатие 'ESC' не срабатывает, если фокус находится в поле изменения имени персонажа.
- * @param{object} evt Объект текущего события.
+ * @param {object} evt Объект текущего события.
  */
 var onKeyPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && getActiveElement() !== 'INPUT') {
@@ -176,7 +176,6 @@ var onKeyPress = function (evt) {
  * - изменяет цвет глаз волшебника в окне настройки персонажа, при клике на глаза.
  * - изменяет цвет мантии волшебника в окне настройки персонажа, при клике на мантию.
  * - изменяет цвет фаербола в окне настройки персонажа, при клике на фаербол.
- * @param {object} evt Объект текущего события.
  */
 var openPopup = function () {
   setup.classList.remove('hidden');
@@ -195,7 +194,6 @@ var openPopup = function () {
  * - изменяет цвет глаз волшебника в окне настройки персонажа, при клике на глаза.
  * - изменяет цвет мантии волшебника в окне настройки персонажа, при клике на мантию.
  * - изменяет цвет фаербола в окне настройки персонажа, при клике на фаербол.
- * @param {object} evt Объект текущего события.
  */
 var closePopup = function () {
   setup.classList.add('hidden');
@@ -205,7 +203,9 @@ var closePopup = function () {
   document.removeEventListener('click', onFireballClick);
 };
 
-setupOpen.addEventListener('click', openPopup);
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
 
 setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
@@ -213,7 +213,9 @@ setupOpen.addEventListener('keydown', function (evt) {
   }
 });
 
-setupClose.addEventListener('click', closePopup);
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
 
 setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
